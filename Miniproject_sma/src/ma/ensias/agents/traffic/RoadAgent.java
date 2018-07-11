@@ -1,0 +1,79 @@
+package ma.ensias.agents.traffic;
+import jade.core.behaviours.TickerBehaviour;
+import jade.gui.GuiAgent;
+import jade.gui.GuiEvent;
+import javafx.scene.control.RadioButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.paint.Color;
+
+import jade.core.ProfileImpl;
+import jade.core.Runtime;
+import jade.gui.GuiEvent;
+import jade.wrapper.AgentContainer;
+import jade.wrapper.AgentController;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Rectangle2D;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+
+public class RoadAgent extends GuiAgent {
+	
+	
+	String[] StateEnv = new String[]{"il fait beau","il pleut","il est très nuageux"};
+	@Override
+	protected void setup() {
+		//MainApplication gui=(MainApplication) getArguments()[0];
+		System.out.println("Agent route"+"  "+ this.getLocalName()+" est prêt");
+
+		addBehaviour(new TickerBehaviour(this, 10000) {
+			@Override
+		protected void onTick() {
+				int random= (int) (Math.random() *3 );;
+				System.out.println(getLocalName()+" annonce qu'"+StateEnv[random] );
+			}		
+		});
+		
+	}
+
+	@Override
+	protected void beforeMove() {
+		System.out.println("Avant de migrer vers une nouvelle location .....");
+	}
+
+	@Override
+	protected void afterMove() {
+		System.out.println("Je viens d'arriver à une nouvelle location .....");
+	}
+
+	@Override
+	protected void takeDown() {
+		System.out.println("avant de mourir .....");
+	}
+
+	@Override
+	protected void onGuiEvent(GuiEvent guiEvent) {
+	}
+}
